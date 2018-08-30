@@ -1,5 +1,5 @@
 
-insert into Readings (Day, OT, NT, PP)
+insert into Readings
 values
 (1, "Genesis 1:1-2:17",     "Matthew 1:1-25", "Psalm 1:1-6"),
 (2, "Genesis 2:18-4:16",    "Matthew 2:1-18", "Psalm 2:1-12"),
