@@ -1,5 +1,4 @@
-
-insert into Readings
+insert into Readings (Day, OT, NT, PP)
 values
 (1, "Genesis 1:1-2:17",     "Matthew 1:1-25", "Psalm 1:1-6"),
 (2, "Genesis 2:18-4:16",    "Matthew 2:1-18", "Psalm 2:1-12"),
@@ -72,7 +71,7 @@ values
 (69 ,"Leviticus 21:1-22:33", "Mark 15:1-32", "Psalm 31:19-24"),
 (70 ,"Leviticus 23:1-24:23", "Mark 15:33-47", "Psalm 32:1-11"),
 (71 ,"Leviticus 25:1-26:13", "Mark 16:1-20", "Psalm 33:1-11"),
-(72 ,"Leviticus 26:14-27:34","Luke 1:1-25", "Proverbs 7:1-5", 
+(72 ,"Leviticus 26:14-27:34","Luke 1:1-25", "Proverbs 7:1-5"), 
 (73 ,"Numbers 1:1-2:9",      "Luke 1:26-38", "Psalm 33:12-22"),
 (74 ,"Numbers 2:10-3:51",    "Luke 1:39-56", "Psalm 34:1-10"),
 (75 ,"Numbers 4:1-5:10",     "Luke 1:57-80", "Psalm 34:11-22"),
@@ -212,7 +211,7 @@ values
 (209,"1 Chronicles 4:9-5:26",      "Romans 11:11-32", "Psalm 89:19-29"),
 (210,"1 Chronicles 6:1-81",        "Romans 11:33-12:21", "Psalm 89:30-37"),
 (211,"1 Chronicles 7:1-9:1a",      "Romans 13:1-14", "Psalm 89:38-45"),
-(212,"1 Chronicles 9:1b-10:14",    "Romans 14:1-18", "Proverbs 18:17-19:2", 
+(212,"1 Chronicles 9:1b-10:14",    "Romans 14:1-18", "Proverbs 18:17-19:2"), 
 (213,"1 Chronicles 11:1-12:22",     "Romans 14:19-15:13", "Psalm 89:46-52"),
 (214,"1 Chronicles 12:23-14:17",    "Romans 15:14-33", "Psalm 90:1-10"),
 (215,"1 Chronicles 15:1-16:36",     "Romans 16:1-27", "Psalm 90:11-17"),
@@ -315,14 +314,14 @@ values
 (312,"Ezekiel 16:1-63",    "Hebrews 9:1-15", "Proverbs 27:5-14"),
 (313,"Ezekiel 17:1-18:32", "Hebrews 9:16-28", "Psalm 121:1-8"),
 (314,"Ezekiel 19:1-20:44", "Hebrews 10:1-18", "Psalm 122:1-9"),
-(315,"Ezekiel 20:45-22:22","Hebrews 10:19-39", "Psalm 123:1-4", 
-(316,"Ezekiel 22:23-23:49","Hebrews 11:1-16", "Proverbs 27:15-22", 
+(315,"Ezekiel 20:45-22:22","Hebrews 10:19-39", "Psalm 123:1-4"), 
+(316,"Ezekiel 22:23-23:49","Hebrews 11:1-16", "Proverbs 27:15-22"), 
 (317,"Ezekiel 24:1-25:17", "Hebrews 11:17-40", "Psalm 124:1-8"),
 (318,"Ezekiel 26:1-27:36", "Hebrews 12:1-13", "Psalm 125:1-5"),
 (319,"Ezekiel 28:1-29:21", "Hebrews 12:14-29", "Psalm 126:1-6"),
 (320,"Ezekiel 30:1-31:18", "Hebrews 13:1-25", "Proverbs 27:23-28:6"),
 (321,"Ezekiel 32:1-33:20", "James 1:1-27", "Psalm 127:1-5"),
-(322,"Ezekiel 33:21-35:15","James 2:1-26", "Psalm 128:1-6", 
+(322,"Ezekiel 33:21-35:15","James 2:1-26", "Psalm 128:1-6"), 
 (323,"Ezekiel 36:1-37:28", "James 3:1-18", "Psalm 129:1-8"),
 (324,"Ezekiel 38:1-39:29", "James 4:1-17", "Proverbs 28:7-17"),
 (325,"Ezekiel 40:1-49",    "James 5:1-20", "Psalm 130:1-8"),
@@ -344,7 +343,7 @@ values
 (341,"Zechariah 1:1-4:14",  "3 John 1-14", "Psalm 139:11-16"),
 (342,"Zechariah 5:1-8:23",  "Jude 1-25", "Psalm 139:17-24"),
 (343,"Zechariah 9:1-11:17", "Revelation 1:1-20", "Psalm 140:1-5"),
-(344,"Zechariah 12:1-14:21","Revelation 2:1-17", "Proverbs 30:1-10", 
+(344,"Zechariah 12:1-14:21","Revelation 2:1-17", "Proverbs 30:1-10"), 
 (345,"Esther 1:1-2:18",     "Revelation 2:18-3:6", "Psalm 140:6-13"),
 (346,"Esther 2:19-5:14",    "Revelation 3:7-22", "Psalm 141:1-10"),
 (347,"Esther 6:1-8:17",     "Revelation 4:1-11", "Psalm 142:1-7"),
@@ -364,5 +363,5 @@ values
 (361,"Nehemiah 7:4-8:18",   "Revelation 18:17b-19:10", "Psalm 148:1-6"),
 (362,"Nehemiah 9:1-37",     "Revelation 19:11-21", "Psalm 148:7-14"),
 (363,"Nehemiah 9:38-11:21", "Revelation 20:1-15", "Psalm 149:1-9"),
-(364,"Nehemiah 11:22-12:47","Revelation 21:1-27", "Proverbs 31:21-31", 
+(364,"Nehemiah 11:22-12:47","Revelation 21:1-27", "Proverbs 31:21-31"), 
 (365,"Nehemiah 13:1-31",    "Revelation 22:1-21", "Psalm 150:1-6");

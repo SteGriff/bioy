@@ -17,32 +17,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css">
     
-    <!-- import the webpage's client-side javascript file -->
-    <script src="/client.js" defer></script>
   </head>
   <body>
     <header>
       <h1>
-        A Dream of the Future
+        Bible in One Year
       </h1>
     </header>
 
-    <main>
-      <p class="bold">Oh hi,</p>
-      
-      <p>Tell me your hopes and dreams:</p>
-      
-      <form>
-        <input name="dream" type="text" maxlength="100" placeholder="Dreams!" aria-labelledby="submit-dream">
-        <button type="submit" id="submit-dream">Submit Dream</button>
-      </form>
-      
-      <section class="dreams">
-        <ul id="dreams"></ul>
-      </section>
+    <main id="app">
+      <p class="bold">Readings!</p>
+            
+      <table>
+        <thead>
+          <th>Day</th>
+          <th>OT</th>
+          <th>NT</th>
+          <th>PP</th>
+        </thead>
+        <tbody>
+          <tr v-for="reading in readings">
+            <td>{{reading.Day}}</td>
+            <td>{{reading.OT}}</td>
+            <td>{{reading.NT}}</td>
+            <td>{{reading.PP}}</td>
+          </tr>
+        </tbody>
+      </table>
     </main>
 
     <footer>
@@ -54,5 +57,8 @@
     <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
     <script src="https://button.glitch.me/button.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="/client.js"></script>
+    
   </body>
 </html>
