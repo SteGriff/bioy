@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Welcome to Glitch!</title>
+    <title>Bible in One Year</title>
     <meta name="description" content="A cool thing made with Glitch">
     <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
     <meta charset="utf-8">
@@ -13,21 +13,26 @@
     
   </head>
   <body>
-    <header>
+    
+    <main id="app">
+    <header class="ma2 ma3-ns">
       <h1>
         Bible in One Year
       </h1>
-    </header>
-
-    <main id="app">
+      
       <p>
         I am following the <a href="http://bible.soulsurvivor.com/">Soul Survivor Bible in One Year</a> schedule.
       </p>
       
       <p>
-        <strong>Coming soon:</strong> Save personal notes and progress 
+        <strong>Coming soon:</strong> Save personal notes and progress.
       </p>
       
+      <p class="f6">
+        <strong>JSON API</strong> (for nerds): <a href="https://bioy.glitch.me/getReadings">https://bioy.glitch.me/getReadings</a>
+      </p>
+    </header>
+
       <br>
       
       <table cellspacing="0" class="w-100 mw8 center">
@@ -46,16 +51,11 @@
           </tr>
         </tbody>
       </table>
+      
+      <p>
+        😁📔 <a href="https://glitch.com/~bioy">Made on Glitch by Ste</a>
+      </p>
     </main>
-
-    <footer>
-      Made with <a href="https://glitch.com">Glitch</a>!
-    </footer>
-
-    <!-- include the Glitch button to show what the webpage is about and
-          to make it easier for folks to view source and remix -->
-    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
-    <script src="https://button.glitch.me/button.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="/client.js"></script>
