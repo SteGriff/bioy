@@ -15,7 +15,25 @@
   <body>
     <main id="app">
     <header class="w-100 pa3 ph3-ns bg-white">
-      
+      <div class="db dtc-ns v-mid tl tr-ns mt2 mt0-ns">
+        <span class="f6 ttu black-70 mr1 dib">
+            Credentials:
+        </span>
+        <span>
+            <input ng-model="username" type="text" placeholder="username" class="pa1 ph2 h2
+               b--black-60 black-80 bg-white bw1 ba" />
+
+            <input ng-model="password" type="password" placeholder="password" class="pa1 ph2 h2
+               b--black-60 black-80 bg-white bw1 ba" />
+
+            <button type="button" ng-click="getGrammar()"
+                    class="dib mv1 pa1 ph3 h2 w4
+                    b--black-80 black-80 bg-white bw1 ba
+                    b pointer">
+                Login
+            </button>
+        </span>
+      </div>
     </header>
     <header class="ma2 ma3-ns">
       <h1>
