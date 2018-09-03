@@ -1,20 +1,19 @@
 var app = new Vue({
     el: '#app',
     data: {
+      loggedIn : false,
       readings : []
     },
     mounted : function()
     {
-      self = this;
-      const whenReady = function() {
-        self.readings = JSON.parse(this.responseText);
+      //self = this;
+      
+    },
+    methods : {
+     getNotes : function()
+      {
+        self = this;
+        
       }
-
-      // request the dreams from our app's sqlite database
-      const dreamRequest = new XMLHttpRequest();
-      dreamRequest.onload = whenReady;
-      dreamRequest.open('get', '/getReadings');
-      dreamRequest.send();
-
-    }  
+    }
   });

@@ -16,16 +16,24 @@
     <main id="app">
     <header class="w-100 bb bw1 b--black-60 pa2">
       <form class="js-form w-100 flex-ns">
-        <input ng-model="username" type="text" placeholder="username"
-               class="ma2 h2 b--black-60 black-80 bw1 ba" />
+        <input type="text" placeholder="username"
+               v-if="!loggedIn"
+               class="mv1 ma2-ns h2 b--black-60 black-80 bw1 ba" />
 
-        <input ng-model="password" type="password" placeholder="password"
-               class="ma2 h2 b--black-60 black-80 bw1 ba" />
+        <input type="password" placeholder="password"
+               v-if="!loggedIn"
+               class="mv1 ma2-ns h2 b--black-60 black-80 bw1 ba" />
 
         <button type="button" v-on:click.prevent="getNotes()"
-                class="ma2 h2 w4 b--black-60 black-80 bg-white bw1 ba
-                b pointer">
+                v-if="!loggedIn"
+                class="mv1 ma2-ns h2 w-100 w4-ns b--black-60 black-80 bg-white bw1 ba b pointer">
             Login
+        </button>
+
+        <button type="button" v-on:click.prevent="createUser()"
+                v-if="!loggedIn"
+                class="mv1 ma2-ns h2 w-100 w4-ns b--black-60 black-80 bg-white bw1 ba b pointer">
+            Register
         </button>
       </form>
     </header>
