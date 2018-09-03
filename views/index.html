@@ -14,23 +14,20 @@
   </head>
   <body>
     <main id="app">
-    <header class="w-100 bb bw1 b--black-60 flex">
-      <div>
-        <label for="username" class="">Credentials</label>
-      </div>
+    <header class="w-100 bb bw1 b--black-60 pa2">
+      <form class="js-form w-100 flex-ns">
+        <input ng-model="username" type="text" placeholder="username"
+               class="ma2 h2 b--black-60 black-80 bw1 ba" />
 
-      <input ng-model="username" type="text" placeholder="username"
-             class="h2 b--black-60 black-80 bw1 ba" />
+        <input ng-model="password" type="password" placeholder="password"
+               class="ma2 h2 b--black-60 black-80 bw1 ba" />
 
-      <input ng-model="password" type="password" placeholder="password"
-             class="h2 b--black-60 black-80 bw1 ba" />
-
-      <button type="button" ng-click="getGrammar()"
-              class="dib mv1 pa1 ph3 h2 w4
-              b--black-80 black-80 bg-white bw1 ba
-              b pointer">
-          Login
-      </button>
+        <button type="button" v-on:click.prevent="getNotes()"
+                class="ma2 h2 w4 b--black-60 black-80 bg-white bw1 ba
+                b pointer">
+            Login
+        </button>
+      </form>
     </header>
     <header class="ma2 ma3-ns">
       <h1>
