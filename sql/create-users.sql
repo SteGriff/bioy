@@ -5,9 +5,9 @@ create table Users
   Password nvarchar(100)
 );
 
-create table Messages
+create table Notes
 (
   ID integer primary key autoincrement,
   UserID integer,
-  Message nvarchar(255)
+  OTN
 );

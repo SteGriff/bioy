@@ -76,7 +76,7 @@ app.post('/addMessage', function(request, response) {
   });
 });
 
-app.get('/getMessages', function(request, response) {
+app.get('/getNotes', function(request, response) {
   ifAuthenticated(request.query, function(error, userId){
     if (error)
     {
@@ -86,7 +86,7 @@ app.get('/getMessages', function(request, response) {
     else
     {
       console.log("Getting msgs");
-      db.all('SELECT * from Messages where UserID=?',[userId], function(err, rows) {
+      db.all('SELECT * from Notes where UserID=?',[userId], function(err, rows) {
         console.log(err, rows);
         response.send(JSON.stringify(rows));
       });
