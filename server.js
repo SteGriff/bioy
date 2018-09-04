@@ -77,6 +77,29 @@ app.post('/addMessage', function(request, response) {
   });
 });
 
+app.post('/setDone', function(request, response) {
+  ifAuthenticated(request.body, function(error, userId){
+    if (error)
+    {
+      response.status(401).send("Wrong username/password!");
+    }
+    else
+    {
+      console.log(request.body);
+      db.run("update Notes set Done=? where  values(?, ?)", [userId, request.body.message], function(error)
+      {
+        if (error) {
+          console.log("Fail", error);
+          response.status(500).send("Insert failed");
+        }
+        else { 
+          response.sendStatus(201);
+        }
+      });
+    }
+  });
+});
+
 app.get('/getNotes', function(request, response) {
   ifAuthenticated(request.query, function(error, userId){
     if (error)

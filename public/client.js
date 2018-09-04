@@ -58,15 +58,31 @@ var app = new Vue({
       self.message="Saving...";
       var formData = getFormData($('.js-form'));
       formData['field'] = self.modalField;
-      formData['note'] = 
+      formData['note'] = self.note;
+      console.log(formData);
       $.post('/addMessage', formData, function(response){
-       console.log(response); 
+        console.log(response); 
         self.message="done!";
       })
       .fail(function(data){
         self.showMessage(data.responseText);
       });
     },
+    toggleDone : function(day, done)
+    {
+      self=this;
+      self.message="Saving...";
+      var formData = getFormData($('.js-form'));
+      formData['day'] = day;
+      formData['done'] = done;
+      $.post('/setDone', formData, function(response){
+        console.log(response); 
+        self.message="Saved";
+      })
+      .fail(function(data){
+        self.showMessage(data.responseText);
+      });
+    }
     showMessage: function(msg)
     {
       this.message = "😓 Error: " + msg;
