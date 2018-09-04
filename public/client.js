@@ -1,36 +1,61 @@
 var app = new Vue({
-    el: '#app',
-    data: {
-      loggedIn : false,
-      readings : []
-    },
-    mounted : function()
+  el: '#app',
+  data: {
+    message: '',
+    loggedIn : false,
+    readings : []
+  },
+  mounted : function()
+  {
+    self = this;
+    $.get('/getReadings', function(data)
     {
-      self = this;
-      $.get('/getReadings', function(data)
-      {
-        self.readings = JSON.parse(data);
+      self.readings = JSON.parse(data);
+    });
+  },
+  methods : {
+    createUser : function()
+    {
+      self=this;
+      self.message="Registering...";
+      var formData = getFormData($('.js-form'));
+      $.post('/createUser', formData, function(response){
+        console.log(response);
+        self.message="";
+        self.loggedIn = true;
+      })
+      .fail(function(data){
+        self.showMessage(data.responseText);
+        self.loggedIn = false;
       });
     },
-    methods : {
-     getNotes : function()
-      {
-        self = this;
-        self.message="Getting notes...";
-        var formData = getFormData($('.js-form'));
-        console.log(formData);
-        $.get('/getNotes', formData, function(response){
-           console.log(response); 
-          self.notes = JSON.parse(response);
-          self.message="Notes loaded";
-        })
-        .fail(function(data){
-          self.showMessage(data.responseText);
-        });
-      },
-      showMessage: function(msg)
-      {
-        this.message = "😓 Error: " + msg;
-      }
+   getNotes : function()
+    {
+      self = this;
+      self.message="Getting notes...";
+      var formData = getFormData($('.js-form'));
+      console.log(formData);
+      $.get('/getNotes', formData, function(response){
+         console.log(response); 
+        self.notes = JSON.parse(response);
+        self.message="Notes loaded";
+        self.loggedIn = true;
+      })
+      .fail(function(data){
+        self.showMessage(data.responseText);
+        self.loggedIn = false;
+      });
+    },
+    showMessage: function(msg)
+    {
+      this.message = "😓 Error: " + msg;
     }
-  });
+  }
+});
+
+function getFormData($form){
+    var formData = $form.serializeArray();
+    var data = {};
+    $.map(formData, n=>data[n['name']] = n['value']);
+    return data;
+}
