@@ -47,7 +47,10 @@ var app = new Vue({
         for(var nx in self.notes)
         {
           var note = self.notes[nx];
-          console.log(note);
+          var reading = self.readings[nx];
+          console.log(note.Day, note.GeneralNote, note.Done);
+          reading.note = note.GeneralNote;
+          reading.done = note.Done;
         }
         //console.log(self.notes);
         self.message="Notes loaded";
