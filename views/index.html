@@ -73,10 +73,7 @@
             </td>
             <td class="pa2">{{reading.NT}}<a v-if="loggedIn" v-on:click="openModal('nt', reading.NT)">📝</a></td>
             <td class="pa2">{{reading.PP}}<a v-if="loggedIn" v-on:click="openModal('pp', reading.PP)">📝</a></td>
-            <td class="pa2"><input type="checkbox" name="done"
-                                   v-if="loggedIn"
-                                   v-model="reading.Done"
-                                   v-on:click="setDone(reading)"></td>
+            <td class="pa2"><synced-tick></synced-tick></td>
           </tr>
         </tbody>
       </table>
