@@ -55,7 +55,8 @@ app.post('/createUser', function(request, response) {
   });
 });
 
-app.post('/addMessage', function(request, response) {
+app.post('/saveNote', function(request, response) {
+  console.log("saveNote", request.body);
   ifAuthenticated(request.body, function(error, userId){
     if (error)
     {
@@ -63,19 +64,37 @@ app.post('/addMessage', function(request, response) {
     }
     else
     {
-      db.run("insert into Messages (UserID, Message) values(?, ?)", [userId, request.body.message], function(error)
-      {
-        if (error) {
-          console.log("Fail", error);
-          response.status(500).send("Insert failed");
-        }
-        else { 
-          response.sendStatus(201);
-        }
-      });
+      console.log(request.body);
+      db.run("insert into Notes (userid, day, done, generalnote) select $userid, $day, $done, $note where not exists (select * from Notes where userid=$userid and day=$day);",
+        {
+          $userid: userId,
+          $day: request.body.day,
+          $done: sqlBit(request.body.done),
+          $note: request.body.note
+        },
+        function(error){console.log("Fail", error);}
+        );
+      db.run("update Notes set Done=$done,GeneralNote=$note where userid=$userid and day=$day;",
+        {
+          $userid: userId,
+          $day: request.body.day,
+          $done: sqlBit(request.body.done),
+          $note: request.body.note
+        },
+        function(error)
+        {
+          if (error) {
+            console.log("Fail", error);
+            response.status(500).send("Update failed");
+          }
+          else {
+            response.sendStatus(200);
+          }
+        });
     }
   });
 });
+
 
 app.post('/setDone', function(request, response) {
   console.log("SetDone", request.body);

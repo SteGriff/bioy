@@ -18,7 +18,7 @@
     <main>
     <header class="w-100 bb bw1 b--black-60 pa2">
       <form class="js-form w-100 flex-ns">
-        <span>
+        <span class="mt3 mh2">
           {{message}}
         </span>
         <input type="text" placeholder="username" name="username" v-model="username"
@@ -44,7 +44,7 @@
         <button type="button" v-on:click.prevent="logout()"
                 v-if="loggedIn"
                 class="mv1 ma2-ns h2 w-100 w4-ns b--black-60 black-80 bg-white bw1 ba b pointer">
-            Login
+            Logout
         </button>
 
       </form>

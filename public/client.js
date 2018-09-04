@@ -59,12 +59,12 @@ var app = new Vue({
       self.message="Saving...";
       var formData = self.newRequest();
       formData['field'] = self.modalField;
-      formData['note'] = self.note;
-      formData['done'] = 
+      formData['note'] = self.activeReading.GeneralNote;
+      formData['done'] = self.activeReading.Done;
       console.log(formData);
-      $.post('/addMessage', formData, function(response){
+      $.post('/saveNote', formData, function(response){
         console.log(response); 
-        self.message="done!";
+        self.message="Saved!";
       })
       .fail(function(data){
         self.showMessage(data.responseText);
