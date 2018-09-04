@@ -38,7 +38,7 @@ var app = new Vue({
     {
       self = this;
       self.message="Getting notes...";
-      var formData = getFormData($('.js-form'));
+      var formData = self.newRequest();
       console.log(formData);
       $.get('/getNotes', formData, function(response){
         console.log(response); 
@@ -56,7 +56,7 @@ var app = new Vue({
     {
       self=this;
       self.message="Saving...";
-      var formData = getFormData($('.js-form'));
+      var formData = self.newRequest();
       formData['field'] = self.modalField;
       formData['note'] = self.note;
       console.log(formData);
@@ -68,13 +68,14 @@ var app = new Vue({
         self.showMessage(data.responseText);
       });
     },
-    toggleDone : function(day, done)
+    setDone : function(reading)
     {
       self=this;
       self.message="Saving...";
-      var formData = getFormData($('.js-form'));
-      formData['day'] = day;
-      formData['done'] = done;
+      var formData = self.newRequest();
+      formData['day'] = reading.Day;
+      formData['done'] = reading.Done;
+      console.log("setDone", formData);
       $.post('/setDone', formData, function(response){
         console.log(response); 
         self.message="Saved";
@@ -82,6 +83,13 @@ var app = new Vue({
       .fail(function(data){
         self.showMessage(data.responseText);
       });
+    },
+    newRequest: function()
+    {
+      return {
+        'username' : this.username,
+        'password' : this.password
+      };
     }
     showMessage: function(msg)
     {

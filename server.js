@@ -78,6 +78,7 @@ app.post('/addMessage', function(request, response) {
 });
 
 app.post('/setDone', function(request, response) {
+  console.log("SetDone", request.body);
   ifAuthenticated(request.body, function(error, userId){
     if (error)
     {
@@ -88,26 +89,26 @@ app.post('/setDone', function(request, response) {
       console.log(request.body);
       db.run("insert into Notes (userid, day, done) select $userid, $day, $done where not exists (select * from Notes where userid=$userid and day=$day);",
         {
-          $userid: request.body.UserID,
-          $day: request.body.Day,
-          $done: sqlBit(request.body.Done)
+          $userid: userId,
+          $day: request.body.day,
+          $done: sqlBit(request.body.done)
         },
-        function(error){}
+        function(error){console.log("Fail", error);}
         );
-      db.run("update Notes (userid, day, done) select $userid, $day, $done where not exists (select * from Notes where userid=$userid and day=$day);",
+      db.run("update Notes (userid, day, done) set Done=$done where userid=$userid and day=$day;",
         {
-          $userid: request.body.UserID,
-          $day: request.body.Day,
-          $done: sqlBit(request.body.Done)
+          $userid: userId,
+          $day: request.body.day,
+          $done: sqlBit(request.body.done)
         },
         function(error)
         {
           if (error) {
             console.log("Fail", error);
-            response.status(500).send("Insert failed");
+            response.status(500).send("Update failed");
           }
-          else { 
-            response.sendStatus(201);
+          else {
+            response.sendStatus(200);
           }
         });
     }

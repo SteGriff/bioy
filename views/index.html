@@ -19,11 +19,11 @@
         <span>
           {{message}}
         </span>
-        <input type="text" placeholder="username" name="username"
+        <input type="text" placeholder="username" name="username" v-model="username"
                v-if="!loggedIn"
                class="mv1 ma2-ns h2 b--black-60 black-80 bw1 ba" />
 
-        <input type="password" placeholder="password" name="password"
+        <input type="password" placeholder="password" name="password" v-model="password"
                v-if="!loggedIn"
                class="mv1 ma2-ns h2 b--black-60 black-80 bw1 ba" />
 
@@ -69,11 +69,14 @@
             <td class="pa2">
               {{reading.OT}}
               <a v-if="loggedIn" v-on:click="openModal('ot', reading.OT)">📝</a>
-              <div v-if="loggedIn && notes[index]['ot']" class="f6">{{notes[index]['ot']}}</div>
+<!--               <div v-if="loggedIn && notes[index]['ot']" class="f6">{{notes[index]['ot']}}</div> -->
             </td>
             <td class="pa2">{{reading.NT}}<a v-if="loggedIn" v-on:click="openModal('nt', reading.NT)">📝</a></td>
             <td class="pa2">{{reading.PP}}<a v-if="loggedIn" v-on:click="openModal('pp', reading.PP)">📝</a></td>
-            <td class="pa2"><input type="checkbox" name="done" value="false" v-if="loggedIn" v-on:click="toggleDone(reading.Day)"></td>
+            <td class="pa2"><input type="checkbox" name="done"
+                                   v-if="loggedIn"
+                                   v-model="reading.Done"
+                                   v-on:click="setDone(reading)"></td>
           </tr>
         </tbody>
       </table>
