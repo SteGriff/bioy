@@ -68,12 +68,14 @@
             <td class="pa2">{{reading.Day}} ({{index}} {{reading.Done}})</td>
             <td class="pa2">
               {{reading.OT}}
-              <a v-if="loggedIn" v-on:click="openModal('ot', reading.OT)">📝</a>
+              
 <!--               <div v-if="loggedIn && notes[index]['ot']" class="f6">{{notes[index]['ot']}}</div> -->
             </td>
             <td class="pa2">{{reading.NT}}<a v-if="loggedIn" v-on:click="openModal('nt', reading.NT)">📝</a></td>
             <td class="pa2">{{reading.PP}}<a v-if="loggedIn" v-on:click="openModal('pp', reading.PP)">📝</a></td>
-            <td class="pa2"><synced-tick></synced-tick></td>
+            <td class="pa2">
+              <a v-if="loggedIn" v-on:click="openModal('ot', reading.OT)">📝</a>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -114,13 +116,18 @@
                         <textarea class="pa2 input-reset ba bg-transparent w-100"
                                v-model="note" name="note"></textarea>
                     </div>
+                  <div class="mt3">
+                    <label for="done">Read it?</label>              
+                    <input type="checkbox" name="done"
+                      v-model="reading.Done">
+                  </div>
                 </fieldset>
                 <div>
                     <button class="b ph3 pv2 input-reset
                       b--black-80 black-80 bg-white bw1 ba
                       pointer dib"
                             v-on:click.prevent="saveNote()">
-                        Save note
+                        Save
                     </button>
                 </div>
             </form>
@@ -132,6 +139,7 @@
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 			  crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="/synced-tick.js"></script>
     <script src="/client.js"></script>
     
   </body>

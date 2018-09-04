@@ -6,10 +6,9 @@ var app = new Vue({
     message: '',
     loggedIn: false,
     modal: false,
-    modalField: null,
-    modalTitle: '',
     readings : [],
-    notes: []
+    notes: [],
+    activeReading : null
   },
   mounted : function()
   {
@@ -61,26 +60,11 @@ var app = new Vue({
       var formData = self.newRequest();
       formData['field'] = self.modalField;
       formData['note'] = self.note;
+      formData['done'] = 
       console.log(formData);
       $.post('/addMessage', formData, function(response){
         console.log(response); 
         self.message="done!";
-      })
-      .fail(function(data){
-        self.showMessage(data.responseText);
-      });
-    },
-    setDone : function(reading)
-    {
-      self=this;
-      self.message="Saving...";
-      var formData = self.newRequest();
-      formData['day'] = reading.Day;
-      formData['done'] = reading.Done;
-      console.log("setDone", formData);
-      $.post('/setDone', formData, function(response){
-        console.log(response); 
-        self.message="Saved";
       })
       .fail(function(data){
         self.showMessage(data.responseText);
@@ -97,10 +81,9 @@ var app = new Vue({
     {
       this.message = "😓 Error: " + msg;
     },
-    openModal: function(field, title)
+    openModal: function(reading)
     {
-      this.modalField = field;
-      this.modalTitle = title;
+      this.activeReading = reading;
       this.modal = true;
     },
     closeModal : function()
@@ -115,4 +98,9 @@ function getFormData($form){
     var data = {};
     $.map(formData, n=>data[n['name']] = n['value']);
     return data;
+}
+
+function summary(reading)
+{
+  return reading.OT + "; " + reading.NT + "; " + reading.PP; 
 }
