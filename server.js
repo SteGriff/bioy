@@ -56,7 +56,7 @@ app.post('/createUser', function(request, response) {
 });
 
 app.post('/saveNote', function(request, response) {
-  console.log("saveNote", request.body);
+  //console.log("saveNote", request.body);
   ifAuthenticated(request.body, function(error, userId){
     if (error)
     {
@@ -64,7 +64,6 @@ app.post('/saveNote', function(request, response) {
     }
     else
     {
-      console.log(request.body);
       db.run("insert into Notes (userid, day, done, generalnote) select $userid, $day, $done, $note where not exists (select * from Notes where userid=$userid and day=$day);",
         {
           $userid: userId,
@@ -97,7 +96,7 @@ app.post('/saveNote', function(request, response) {
 
 
 app.post('/setDone', function(request, response) {
-  console.log("SetDone", request.body);
+  //console.log("SetDone", request.body);
   ifAuthenticated(request.body, function(error, userId){
     if (error)
     {
@@ -105,7 +104,6 @@ app.post('/setDone', function(request, response) {
     }
     else
     {
-      console.log(request.body);
       db.run("insert into Notes (userid, day, done) select $userid, $day, $done where not exists (select * from Notes where userid=$userid and day=$day);",
         {
           $userid: userId,
@@ -143,7 +141,7 @@ app.get('/getNotes', function(request, response) {
     }
     else
     {
-      console.log("Getting msgs");
+      //console.log("Getting notes");
       db.all('SELECT * from Notes where UserID=?',[userId], function(err, rows) {
         console.log(err, rows);
         response.send(JSON.stringify(rows));
