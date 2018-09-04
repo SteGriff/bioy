@@ -13,7 +13,9 @@
     
   </head>
   <body>
-    <main id="app">
+    <div id="app">
+      
+    <main>
     <header class="w-100 bb bw1 b--black-60 pa2">
       <form class="js-form w-100 flex-ns">
         <span>
@@ -61,7 +63,7 @@
           <th class="tl pa2">OT</th>
           <th class="tl pa2">NT</th>
           <th class="tl pa2">PP</th>
-          <th class="tl pa2">✅</th>
+          <th class="tl pa2" v-if="loggedIn">✅</th>
         </thead>
         <tbody>
           <tr class="stripe-dark" v-for="(reading, index) in readings">
@@ -73,10 +75,10 @@
             </td>
             <td class="pa2">{{reading.NT}}</td>
             <td class="pa2">{{reading.PP}}</td>
-            <td class="pa2">
+            <td class="pa2" v-if="loggedIn">
               <span v-if="true">🔜</span>
               <span v-if="false">✅</span>
-              <a v-if="loggedIn" v-on:click="openModal(reading)">📝</a>
+              <a class="pointer" v-if="loggedIn" v-on:click="openModal(reading)">📝</a>
             </td>
           </tr>
         </tbody>
@@ -97,7 +99,7 @@
 	    t-0 l-0"
          v-if="modal"
          v-on:click="closeModal()"
-         v-cloak>
+         >
     </div>
 
     <div class="z-1
@@ -105,7 +107,7 @@
 		fixed t-50 l-50 translate-center w-90 w-50-ns
 		ma2 pa1 ph3"
          v-if="modal"
-         v-cloak>
+         >
 
         <span class="fr f3 pointer" v-on:click="closeModal()">&times;</span>
 
@@ -136,6 +138,8 @@
         </div>
     </div>
 
+    </div>
+    
     <script
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

@@ -83,12 +83,18 @@ var app = new Vue({
     },
     openModal: function(reading)
     {
+      console.log("openModal", reading)
       this.activeReading = reading;
       this.modal = true;
     },
     closeModal : function()
     {
+      console.log("closeModal");
       this.modal = false;
+    },
+    summary : function(reading)
+    {
+      return reading.OT + "; " + reading.NT + "; " + reading.PP; 
     }
   }
 });
@@ -98,9 +104,4 @@ function getFormData($form){
     var data = {};
     $.map(formData, n=>data[n['name']] = n['value']);
     return data;
-}
-
-function summary(reading)
-{
-  return reading.OT + "; " + reading.NT + "; " + reading.PP; 
 }
