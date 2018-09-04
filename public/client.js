@@ -51,6 +51,14 @@ var app = new Vue({
     showMessage: function(msg)
     {
       this.message = "😓 Error: " + msg;
+    },
+    openModal: function()
+    {
+      this.modal = true;
+    },
+    closeModal : function()
+    {
+      this.modal = false;
     }
   }
 });

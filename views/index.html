@@ -61,13 +61,15 @@
           <th class="tl pa2">OT</th>
           <th class="tl pa2">NT</th>
           <th class="tl pa2">PP</th>
+          <th class="tl pa2">✅</th>
         </thead>
         <tbody>
           <tr class="stripe-dark" v-for="reading in readings">
             <td class="pa2">{{reading.Day}}</td>
-            <td class="pa2">{{reading.OT}}</td>
-            <td class="pa2">{{reading.NT}}</td>
-            <td class="pa2">{{reading.PP}}</td>
+            <td class="pa2">{{reading.OT}}<a v-if="loggedIn" v-on:click="openModal('ot')">📝</a></td>
+            <td class="pa2">{{reading.NT}}<a v-if="loggedIn" v-on:click="openModal('nt')">📝</a></td>
+            <td class="pa2">{{reading.PP}}<a v-if="loggedIn" v-on:click="openModal('pp')">📝</a></td>
+            <td class="pa2"><input type="checkbox" name="done" value="false" v-if="loggedIn"></td>
           </tr>
         </tbody>
       </table>
@@ -104,30 +106,17 @@
                 <fieldset class="ba b--transparent ph0 mh0">
                     <legend class="f4 fw6">{{modalTitle}}</legend>
                     <div class="mt3">
-                        <label class="db fw6 lh-copy f6" for="email-address">Email</label>
-                        <input class="pa2 input-reset ba bg-transparent w-100"
-                               ng-model="newEmail"
-                               type="email" name="email-address" placeholder="person@example.com">
-                    </div>
-                    <div class="mt3">
-                        <label class="db fw6 lh-copy f6" for="email-address">New Username</label>
-                        <input class="pa2 input-reset ba bg-transparent w-100"
-                               ng-model="newUsername"
-                               type="text" name="new-username" placeholder="New username">
-                    </div>
-                    <div class="mv3">
-                        <label class="db fw6 lh-copy f6" for="password">New Password</label>
-                        <input class="b pa2 input-reset ba bg-transparent w-100"
-                               ng-model="newPassword"
-                               type="password" name="password">
+                        <label class="db fw6 lh-copy f6" for="email-address">Notes</label>
+                        <textarea class="pa2 input-reset ba bg-transparent w-100"
+                               v-model="note" name="note"></textarea>
                     </div>
                 </fieldset>
                 <div>
                     <button class="b ph3 pv2 input-reset
-        				b--black-80 black-80 bg-white bw1 ba
-				        pointer dib"
-                            ng-click="upgradeAnon(event)">
-                        Save as real account
+                      b--black-80 black-80 bg-white bw1 ba
+                      pointer dib"
+                            v-on:click.prevent="saveNote()">
+                        Save note
                     </button>
                 </div>
             </form>
