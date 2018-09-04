@@ -68,11 +68,11 @@
             <td class="pa2">{{reading.Day}} ({{index}})</td>
             <td class="pa2">
               {{reading.OT}}
-              <a v-if="loggedIn" v-on:click="openModal('ot')">📝</a>
+              <a v-if="loggedIn" v-on:click="openModal('ot', reading.OT)">📝</a>
               <div v-if="loggedIn && notes[index]['ot']" class="f6">{{notes[index]['ot']}}</div>
             </td>
-            <td class="pa2">{{reading.NT}}<a v-if="loggedIn" v-on:click="openModal('nt')">📝</a></td>
-            <td class="pa2">{{reading.PP}}<a v-if="loggedIn" v-on:click="openModal('pp')">📝</a></td>
+            <td class="pa2">{{reading.NT}}<a v-if="loggedIn" v-on:click="openModal('nt', reading.NT)">📝</a></td>
+            <td class="pa2">{{reading.PP}}<a v-if="loggedIn" v-on:click="openModal('pp', reading.PP)">📝</a></td>
             <td class="pa2"><input type="checkbox" name="done" value="false" v-if="loggedIn"></td>
           </tr>
         </tbody>

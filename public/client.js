@@ -4,6 +4,7 @@ var app = new Vue({
     message: '',
     loggedIn: false,
     modal: false,
+    modalField: null,
     modalTitle: '',
     readings : [],
     notes: []
@@ -51,12 +52,28 @@ var app = new Vue({
         self.loggedIn = false;
       });
     },
+    saveNote : function()
+    {
+      self=this;
+      self.message="Saving...";
+      var formData = getFormData($('.js-form'));
+      formData['field'] = self.modalField;
+      formData['note'] = 
+      $.post('/addMessage', formData, function(response){
+       console.log(response); 
+        self.message="done!";
+      })
+      .fail(function(data){
+        self.showMessage(data.responseText);
+      });
+    },
     showMessage: function(msg)
     {
       this.message = "😓 Error: " + msg;
     },
-    openModal: function(title)
+    openModal: function(field, title)
     {
+      this.modalField = field;
       this.modalTitle = title;
       this.modal = true;
     },
