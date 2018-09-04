@@ -49,7 +49,7 @@
 
         <button type="button" v-on:click.prevent="getNotes()"
                 v-if="loggedIn"
-                class="mv1 ma2-ns h2 w-100 w4-ns b--black-60 black-80 bg-white bw1 ba b pointer">
+                class="mv1 ma2-ns h2 w-100 w5-ns b--black-60 black-80 bg-white bw1 ba b pointer">
             Refresh Notes
           
         </button>
@@ -73,16 +73,16 @@
         </thead>
         <tbody>
           <tr class="stripe-dark" v-for="(reading, index) in readings">
-            <td class="pa2">{{reading.Day}} ({{index}} {{reading.Done}})</td>
+            <td class="pa2">{{reading.Day}}</td>
             <td class="pa2">{{reading.OT}}</td>
             <td class="pa2">{{reading.NT}}</td>
             <td class="pa2">{{reading.PP}}</td>
             <td class="pa2" v-if="loggedIn">
-              <span v-if="true">🔜</span>
-              <span v-if="false">✅</span>
+              <span v-if="!reading.Done">🔜</span>
+              <span v-if="reading.Done">✅</span>
               <a class="pointer" v-if="loggedIn" v-on:click="openModal(reading)">📝</a>
-              <p v-if="loggedIn && reading.Note">
-                {{reading.Note}}
+              <p class="f6" v-if="loggedIn && reading.GeneralNote">
+                {{truncate(reading.GeneralNote)}}
               </p>
             </td>
           </tr>

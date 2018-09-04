@@ -47,10 +47,11 @@ var app = new Vue({
         for(var nx in self.notes)
         {
           var note = self.notes[nx];
-          var reading = self.readings[nx];
+          var reading = self.readings.filter(r => r.Day === note.Day)[0];
+          console.log(reading, reading.Day);
           console.log(note.Day, note.GeneralNote, note.Done);
-          reading.note = note.GeneralNote;
-          reading.done = note.Done;
+          reading.GeneralNote = note.GeneralNote;
+          reading.Done = note.Done;
         }
         //console.log(self.notes);
         self.message="Notes loaded";
@@ -79,6 +80,16 @@ var app = new Vue({
         self.showMessage(data.responseText);
       });
     },
+    logout : function()
+    {
+      this.username = '';
+      this.password = '';
+      this.message = '';
+      this.loggedIn = false;
+      this.modal = false;
+      this.notes = [];
+      this.activeReading = null;
+    },
     newRequest: function()
     {
       return {
@@ -105,7 +116,7 @@ var app = new Vue({
     },
     truncate : function(note)
     {
-      return note.subscript(0,100); 
+      return note.substring(0,100); 
     }
   }
 });
