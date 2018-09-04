@@ -64,9 +64,13 @@
           <th class="tl pa2">✅</th>
         </thead>
         <tbody>
-          <tr class="stripe-dark" v-for="reading in readings">
-            <td class="pa2">{{reading.Day}}</td>
-            <td class="pa2">{{reading.OT}}<a v-if="loggedIn" v-on:click="openModal('ot')">📝</a></td>
+          <tr class="stripe-dark" v-for="(reading, index) in readings">
+            <td class="pa2">{{reading.Day}} ({{index}})</td>
+            <td class="pa2">
+              {{reading.OT}}
+              <a v-if="loggedIn" v-on:click="openModal('ot')">📝</a>
+              <div v-if="loggedIn && notes[index]['ot']" class="f6">{{notes[index]['ot']}}</div>
+            </td>
             <td class="pa2">{{reading.NT}}<a v-if="loggedIn" v-on:click="openModal('nt')">📝</a></td>
             <td class="pa2">{{reading.PP}}<a v-if="loggedIn" v-on:click="openModal('pp')">📝</a></td>
             <td class="pa2"><input type="checkbox" name="done" value="false" v-if="loggedIn"></td>
@@ -89,7 +93,7 @@
 	    t-0 l-0"
          v-if="modal"
          v-on:click="closeModal()"
-         >
+         v-cloak>
     </div>
 
     <div class="z-1
@@ -97,7 +101,7 @@
 		fixed t-50 l-50 translate-center w-90 w-50-ns
 		ma2 pa1 ph3"
          v-if="modal"
-         >
+         v-cloak>
 
         <span class="fr f3 pointer" v-on:click="closeModal()">&times;</span>
 

@@ -4,7 +4,9 @@ var app = new Vue({
     message: '',
     loggedIn: false,
     modal: false,
-    readings : []
+    modalTitle: '',
+    readings : [],
+    notes: []
   },
   mounted : function()
   {
@@ -38,8 +40,9 @@ var app = new Vue({
       var formData = getFormData($('.js-form'));
       console.log(formData);
       $.get('/getNotes', formData, function(response){
-         console.log(response); 
+        console.log(response); 
         self.notes = JSON.parse(response);
+        console.log(self.notes);
         self.message="Notes loaded";
         self.loggedIn = true;
       })
@@ -52,8 +55,9 @@ var app = new Vue({
     {
       this.message = "😓 Error: " + msg;
     },
-    openModal: function()
+    openModal: function(title)
     {
+      this.modalTitle = title;
       this.modal = true;
     },
     closeModal : function()
