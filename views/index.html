@@ -81,7 +81,7 @@
               <span v-if="!reading.Done">🔜</span>
               <span v-if="reading.Done">✅</span>
               <a class="pointer" v-if="loggedIn" v-on:click="openModal(reading)">📝</a>
-              <p class="f6" v-if="loggedIn && reading.GeneralNote">
+              <p class="f6 mb0 mt1" v-if="loggedIn && reading.GeneralNote">
                 {{truncate(reading.GeneralNote)}}
               </p>
             </td>

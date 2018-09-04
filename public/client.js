@@ -42,18 +42,12 @@ var app = new Vue({
       var formData = self.newRequest();
       console.log(formData);
       $.get('/getNotes', formData, function(response){
-        //console.log(response); 
         self.notes = JSON.parse(response);
         for(var nx in self.notes)
         {
           var note = self.notes[nx];
-          var reading = self.readings.filter(r => r.Day === note.Day)[0];
-          console.log(reading, reading.Day);
-          console.log(note.Day, note.GeneralNote, note.Done);
-          reading.GeneralNote = note.GeneralNote;
-          reading.Done = note.Done;
+          self.updateReading(note.Day, note.GeneralNote, note.Done);
         }
-        //console.log(self.notes);
         self.message="Notes loaded";
         self.loggedIn = true;
       })
@@ -61,6 +55,13 @@ var app = new Vue({
         self.showMessage(data.responseText);
         self.loggedIn = false;
       });
+    },
+    updateReading : function(day, note, done)
+    {
+      self=this;
+      var reading = self.readings.filter(r => r.Day === day)[0];
+      reading.GeneralNote = note;
+      reading.Done = done;
     },
     saveNote : function()
     {
@@ -74,6 +75,7 @@ var app = new Vue({
       $.post('/saveNote', formData, function(response){
         console.log(response); 
         self.message="Saved!";
+        self.updateReading(self.activeReading.Day, self.activeReading.GeneralNote, self.activeReading.Done);
         self.closeModal();
       })
       .fail(function(data){
@@ -116,7 +118,7 @@ var app = new Vue({
     },
     truncate : function(note)
     {
-      return note.substring(0,100); 
+      return note.substring(0,20) + '...'; 
     }
   }
 });
