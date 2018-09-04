@@ -1,6 +1,8 @@
 var app = new Vue({
   el: '#app',
   data: {
+    username : '',
+    password : '',
     message: '',
     loggedIn: false,
     modal: false,
@@ -90,7 +92,7 @@ var app = new Vue({
         'username' : this.username,
         'password' : this.password
       };
-    }
+    },
     showMessage: function(msg)
     {
       this.message = "😓 Error: " + msg;

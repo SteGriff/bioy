@@ -65,7 +65,7 @@
         </thead>
         <tbody>
           <tr class="stripe-dark" v-for="(reading, index) in readings">
-            <td class="pa2">{{reading.Day}} ({{index}})</td>
+            <td class="pa2">{{reading.Day}} ({{index}} {{reading.Done}})</td>
             <td class="pa2">
               {{reading.OT}}
               <a v-if="loggedIn" v-on:click="openModal('ot', reading.OT)">📝</a>

@@ -95,7 +95,7 @@ app.post('/setDone', function(request, response) {
         },
         function(error){console.log("Fail", error);}
         );
-      db.run("update Notes (userid, day, done) set Done=$done where userid=$userid and day=$day;",
+      db.run("update Notes set Done=$done where userid=$userid and day=$day;",
         {
           $userid: userId,
           $day: request.body.day,
