@@ -19,11 +19,11 @@
         <span>
           {{message}}
         </span>
-        <input type="text" placeholder="username"
+        <input type="text" placeholder="username" name="username"
                v-if="!loggedIn"
                class="mv1 ma2-ns h2 b--black-60 black-80 bw1 ba" />
 
-        <input type="password" placeholder="password"
+        <input type="password" placeholder="password" name="password"
                v-if="!loggedIn"
                class="mv1 ma2-ns h2 b--black-60 black-80 bw1 ba" />
 
@@ -38,6 +38,13 @@
                 class="mv1 ma2-ns h2 w-100 w4-ns b--black-60 black-80 bg-white bw1 ba b pointer">
             Register
         </button>
+        
+        <button type="button" v-on:click.prevent="logout()"
+                v-if="loggedIn"
+                class="mv1 ma2-ns h2 w-100 w4-ns b--black-60 black-80 bg-white bw1 ba b pointer">
+            Login
+        </button>
+
       </form>
     </header>
     <header class="ma2 ma3-ns">
@@ -73,6 +80,59 @@
         <strong>JSON API</strong> (for nerds): <a href="https://bioy.glitch.me/getReadings">https://bioy.glitch.me/getReadings</a>
       </p>
     </main>
+
+    <div class="z-0
+	    bg-gray o-50
+	    fixed absolute--fill
+	    t-0 l-0"
+         v-if="modal"
+         v-on:click="closeModal()"
+         >
+    </div>
+
+    <div class="z-1
+		b--black-80 black-80 bg-white bw1 ba
+		fixed t-50 l-50 translate-center w-90 w-50-ns
+		ma2 pa1 ph3"
+         v-if="modal"
+         >
+
+        <span class="fr f3 pointer" v-on:click="closeModal()">&times;</span>
+
+        <div class="center pv2">
+            <form>
+                <fieldset class="ba b--transparent ph0 mh0">
+                    <legend class="f4 fw6">{{modalTitle}}</legend>
+                    <div class="mt3">
+                        <label class="db fw6 lh-copy f6" for="email-address">Email</label>
+                        <input class="pa2 input-reset ba bg-transparent w-100"
+                               ng-model="newEmail"
+                               type="email" name="email-address" placeholder="person@example.com">
+                    </div>
+                    <div class="mt3">
+                        <label class="db fw6 lh-copy f6" for="email-address">New Username</label>
+                        <input class="pa2 input-reset ba bg-transparent w-100"
+                               ng-model="newUsername"
+                               type="text" name="new-username" placeholder="New username">
+                    </div>
+                    <div class="mv3">
+                        <label class="db fw6 lh-copy f6" for="password">New Password</label>
+                        <input class="b pa2 input-reset ba bg-transparent w-100"
+                               ng-model="newPassword"
+                               type="password" name="password">
+                    </div>
+                </fieldset>
+                <div>
+                    <button class="b ph3 pv2 input-reset
+        				b--black-80 black-80 bg-white bw1 ba
+				        pointer dib"
+                            ng-click="upgradeAnon(event)">
+                        Save as real account
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"

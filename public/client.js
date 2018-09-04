@@ -2,7 +2,8 @@ var app = new Vue({
   el: '#app',
   data: {
     message: '',
-    loggedIn : false,
+    loggedIn: false,
+    modal: false,
     readings : []
   },
   mounted : function()
@@ -19,6 +20,7 @@ var app = new Vue({
       self=this;
       self.message="Registering...";
       var formData = getFormData($('.js-form'));
+      console.log(formData);
       $.post('/createUser', formData, function(response){
         console.log(response);
         self.message="";
