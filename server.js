@@ -86,16 +86,30 @@ app.post('/setDone', function(request, response) {
     else
     {
       console.log(request.body);
-      db.run("update Notes set Done=? where  values(?, ?)", [userId, request.body.message], function(error)
-      {
-        if (error) {
-          console.log("Fail", error);
-          response.status(500).send("Insert failed");
-        }
-        else { 
-          response.sendStatus(201);
-        }
-      });
+      db.run("insert into Notes (userid, day, done) select $userid, $day, $done where not exists (select * from Notes where userid=$userid and day=$day);",
+        {
+          $userid: request.body.UserID,
+          $day: request.body.Day,
+          $done: sqlBit(request.body.Done)
+        },
+        function(error){}
+        );
+      db.run("update Notes (userid, day, done) select $userid, $day, $done where not exists (select * from Notes where userid=$userid and day=$day);",
+        {
+          $userid: request.body.UserID,
+          $day: request.body.Day,
+          $done: sqlBit(request.body.Done)
+        },
+        function(error)
+        {
+          if (error) {
+            console.log("Fail", error);
+            response.status(500).send("Insert failed");
+          }
+          else { 
+            response.sendStatus(201);
+          }
+        });
     }
   });
 });
@@ -153,6 +167,10 @@ function ifAuthenticated(data, callback)
   });
 }
 
+function sqlBit(val)
+{
+  return val ? 1 : 0;
+}
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function() {
