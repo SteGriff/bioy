@@ -71,10 +71,12 @@
               
 <!--               <div v-if="loggedIn && notes[index]['ot']" class="f6">{{notes[index]['ot']}}</div> -->
             </td>
-            <td class="pa2">{{reading.NT}}<a v-if="loggedIn" v-on:click="openModal('nt', reading.NT)">📝</a></td>
-            <td class="pa2">{{reading.PP}}<a v-if="loggedIn" v-on:click="openModal('pp', reading.PP)">📝</a></td>
+            <td class="pa2">{{reading.NT}}</td>
+            <td class="pa2">{{reading.PP}}</td>
             <td class="pa2">
-              <a v-if="loggedIn" v-on:click="openModal('ot', reading.OT)">📝</a>
+              <span v-if="true">🔜</span>
+              <span v-if="false">✅</span>
+              <a v-if="loggedIn" v-on:click="openModal(reading)">📝</a>
             </td>
           </tr>
         </tbody>
@@ -110,16 +112,16 @@
         <div class="center pv2">
             <form>
                 <fieldset class="ba b--transparent ph0 mh0">
-                    <legend class="f4 fw6">{{modalTitle}}</legend>
+                    <legend class="f4 fw6">{{summary(activeReading)}}</legend>
                     <div class="mt3">
                         <label class="db fw6 lh-copy f6" for="email-address">Notes</label>
                         <textarea class="pa2 input-reset ba bg-transparent w-100"
-                               v-model="note" name="note"></textarea>
+                               v-model="activeReading.GeneralNote" name="note"></textarea>
                     </div>
                   <div class="mt3">
                     <label for="done">Read it?</label>              
                     <input type="checkbox" name="done"
-                      v-model="reading.Done">
+                      v-model="activeReading.Done">
                   </div>
                 </fieldset>
                 <div>
