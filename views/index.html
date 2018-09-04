@@ -65,19 +65,19 @@
       
       <table cellspacing="0" class="w-100 mw8 center">
         <thead>
-          <th class="tl pa2">Day</th>
-          <th class="tl pa2">OT</th>
-          <th class="tl pa2">NT</th>
-          <th class="tl pa2">PP</th>
-          <th class="tl pa2" v-if="loggedIn">✅</th>
+          <th class="tl pa1 pa2-ns"><small>Day</small></th>
+          <th class="tl pa1 pa2-ns">OT</th>
+          <th class="tl pa1 pa2-ns">NT</th>
+          <th class="tl pa1 pa2-ns">PP</th>
+          <th class="tl pa1 pa2-ns" v-if="loggedIn">✅</th>
         </thead>
         <tbody>
           <tr class="stripe-dark" v-for="(reading, index) in readings">
-            <td class="pa2">{{reading.Day}}</td>
-            <td class="pa2">{{reading.OT}}</td>
-            <td class="pa2">{{reading.NT}}</td>
-            <td class="pa2">{{reading.PP}}</td>
-            <td class="pa2" v-if="loggedIn">
+            <td class="pa1 pa2-ns">{{reading.Day}}</td>
+            <td class="pa1 pa2-ns">{{reading.OT}}</td>
+            <td class="pa1 pa2-ns">{{reading.NT}}</td>
+            <td class="pa1 pa2-ns">{{reading.PP}}</td>
+            <td class="pa1 pa2-ns" v-if="loggedIn">
               <span v-if="!reading.Done">🔜</span>
               <span v-if="reading.Done">✅</span>
               <a class="pointer" v-if="loggedIn" v-on:click="openModal(reading)">📝</a>
@@ -110,7 +110,7 @@
     <div class="z-1
 		b--black-80 black-80 bg-white bw1 ba
 		fixed t-50 l-50 translate-center w-90 w-50-ns
-		ma2 pa1 ph3"
+		ma2 pv1 ph2 ph3-ns"
          v-if="modal"
          >
 
@@ -150,7 +150,6 @@
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 			  crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="/synced-tick.js"></script>
     <script src="/client.js"></script>
     
   </body>
