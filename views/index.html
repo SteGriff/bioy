@@ -74,7 +74,7 @@
           <th class="tl pa1 pa2-ns" v-if="loggedIn">✅</th>
         </thead>
         <tbody>
-          <tr class="stripe-dark" v-for="(reading, index) in readings">
+          <tr :class="{ 'bg-yellow' : readingDay == reading.Day, 'stripe-dark' : false }" v-for="(reading, index) in readings">
             <td class="pa1 pa2-ns">{{reading.Day}}</td>
             <td class="pa1 pa2-ns">{{reading.OT}}</td>
             <td class="pa1 pa2-ns">{{reading.NT}}</td>

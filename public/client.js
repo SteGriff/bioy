@@ -32,6 +32,16 @@ var app = new Vue({
       self.getNotes();
     }
   },
+  computed : {
+    readingDay : function()
+    {
+      var septFirst = getMostRecentSeptFirst();
+      
+      var day = getDayDiff(septFirst, today);
+      console.log(day);
+      return day;
+    }
+  },
   methods : {
     createUser : function()
     {
@@ -142,4 +152,20 @@ function getFormData($form){
     var data = {};
     $.map(formData, n=>data[n['name']] = n['value']);
     return data;
+}
+
+function getMostRecentSeptFirst(aDate)
+{
+	var bibleYear = aDate.getFullYear();
+	var monthNum = aDate.getMonth() + 1;
+	if (monthNum < 9) { bibleYear -= 1; }
+
+	var mostRecentSeptFirst = new Date(bibleYear + "-09-01");
+	return mostRecentSeptFirst;
+}
+
+function getDayDiff(early, late)
+{
+	var diff = late - early;
+	return Math.floor(diff / 86400000); 
 }
