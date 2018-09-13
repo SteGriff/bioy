@@ -1,8 +1,18 @@
+Vue.use(VueLocalStorage, {
+  bind: true
+});
+
 var app = new Vue({
   el: '#app',
+  localStorage : {
+    username : {
+      default: ''
+    },
+    password : {
+      default: ''
+    }
+  },
   data: {
-    username : '',
-    password : '',
     message: '',
     loggedIn: false,
     modal: false,
@@ -17,6 +27,10 @@ var app = new Vue({
     {
       self.readings = JSON.parse(data);
     });
+    if (self.username && self.password)
+    {
+      self.getNotes();
+    }
   },
   methods : {
     createUser : function()
