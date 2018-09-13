@@ -35,8 +35,8 @@ var app = new Vue({
   computed : {
     readingDay : function()
     {
-      var septFirst = getMostRecentSeptFirst();
-      
+      var today = new Date();
+      var septFirst = getMostRecentSeptFirst(today);
       var day = getDayDiff(septFirst, today);
       console.log(day);
       return day;
@@ -167,5 +167,5 @@ function getMostRecentSeptFirst(aDate)
 function getDayDiff(early, late)
 {
 	var diff = late - early;
-	return Math.floor(diff / 86400000); 
+	return Math.ceil(diff / 86400000); 
 }
