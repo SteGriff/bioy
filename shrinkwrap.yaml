@@ -133,10 +133,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
-  /chownr/1.0.1:
+  /chownr/1.1.1:
     dev: false
     resolution:
-      integrity: sha1-4qdQQqlVGQi+vSW4Uj1fl2nXkYE=
+      integrity: sha512-j38EvO5+LHX84jlo6h4UzmOwi0UgW61WRyPtJz4qaadK5eY3BTS5TY/S1Stc3Uk2lIM6TPevAlULiEJwie860g==
   /co/4.6.0:
     dev: false
     engines:
@@ -158,6 +158,15 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha1-cj599ugBrFYTETp+RFqbactjKBg=
+      tarball: 'http://registry.npmjs.org/combined-stream/-/combined-stream-1.0.6.tgz'
+  /combined-stream/1.0.7:
+    dependencies:
+      delayed-stream: 1.0.0
+    dev: false
+    engines:
+      node: '>= 0.8'
+    resolution:
+      integrity: sha512-brWl9y6vOB1xYPZcpZde3N9zDByXTosAeMDo4p1wzo6UMOX4vumB+TP1RZ76sfE6Md68Q0NJSrE/gbezd4Ul+w==
   /concat-map/0.0.1:
     dev: false
     resolution:
@@ -644,7 +653,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-bAdJv7fBLhWC+/Bls0Oza+mvTaNQtP+1RyhhhvD95pgUJz6XM5IzgmxOkItJ9tkoCiplvAnXI1tNmmUD/eScyA==
-  /needle/2.2.3:
+  /needle/2.2.4:
     dependencies:
       debug: 2.6.9
       iconv-lite: 0.4.24
@@ -654,7 +663,7 @@ packages:
       node: '>= 0.10.x'
     hasBin: true
     resolution:
-      integrity: sha512-GPL22d/U9cai87FcCPO6e+MT3vyHS2j+zwotakDc7kE2DtUAqFKMXLJCTtRp+5S75vXIwQPvIxkvlctxf9q4gQ==
+      integrity: sha512-HyoqEb4wr/rsoaIDfTH2aVL9nWtQqba2/HvMv+++m8u0dz808MaagKILxtfeSN7QU7nvbQ79zk3vYOJp9zsNEA==
   /negotiator/0.6.1:
     dev: false
     engines:
@@ -665,7 +674,7 @@ packages:
     dependencies:
       detect-libc: 1.0.3
       mkdirp: 0.5.1
-      needle: 2.2.3
+      needle: 2.2.4
       nopt: 4.0.1
       npm-packlist: 1.1.11
       npmlog: 4.1.2
@@ -852,7 +861,7 @@ packages:
       aws-sign2: 0.7.0
       aws4: 1.8.0
       caseless: 0.12.0
-      combined-stream: 1.0.6
+      combined-stream: 1.0.7
       extend: 3.0.2
       forever-agent: 0.6.1
       form-data: 2.3.2
@@ -1031,7 +1040,7 @@ packages:
       integrity: sha1-PFMZQukIwml8DsNEhYwobHygpgo=
   /tar/4.4.6:
     dependencies:
-      chownr: 1.0.1
+      chownr: 1.1.1
       fs-minipass: 1.2.5
       minipass: 2.3.4
       minizlib: 1.1.0
