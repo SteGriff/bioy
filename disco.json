@@ -1,8 +1,14 @@
 {
-    "version": "1.0",
-    "services": {
-        "web": {
-            "port": 3000
+  "version": "1.0",
+  "services": {
+    "web": {
+      "port": 3000,
+      "volumes": [
+        {
+          "name": "bioy-data",
+          "destinationPath": "/app/.data"
         }
+      ]
     }
+  }
 }
