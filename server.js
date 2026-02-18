@@ -36,7 +36,6 @@ app.get('/getReadings', function(request, response) {
 app.post('/createUser', function(request, response) {
   ifAuthenticated(request.body, function(error, exists)
   {
-    console.log(error, exists);
     if (exists)
     {
       response.status(400).send("Already exists");
@@ -97,7 +96,6 @@ app.post('/saveNote', function(request, response) {
 
 
 app.post('/setDone', function(request, response) {
-  //console.log("SetDone", request.body);
   ifAuthenticated(request.body, function(error, userId){
     if (error)
     {
@@ -142,9 +140,7 @@ app.get('/getNotes', function(request, response) {
     }
     else
     {
-      //console.log("Getting notes");
       db.all('SELECT * from Notes where UserID=?',[userId], function(err, rows) {
-        console.log(err, rows);
         response.send(JSON.stringify(rows));
       });
     }
