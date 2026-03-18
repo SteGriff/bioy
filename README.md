@@ -1,17 +1,20 @@
 # Bible in One Year
 
-## Setup
+A way to check readings and save/sync notes for each day.
 
-Open the Console (Ctrl+Shift+X and allow popup), then run:
+Originally built on glitch.com in 2018 while I was learning Node/Express. Now built to run using disco.cloud or a general docker host.
 
-    sqlite3 .data/sqlite.db
-    .read sql/create-readings.sql
-    .read sql/create-users.sql
-    .read sql/create-notes.sql
-    .read sql/insert-readings.sql
-    select * from Readings
-  
-You should see a table of readings pop out
+My instance is <https://bioy.sign.me.uk>
+
+## Setup Data
+
+Open a terminal in the root of the project, and run
+
+```
+node sql/migrations.mjs
+```
+
+...to populate the SQL tables.
 
 ## Design Notes
 
@@ -23,7 +26,3 @@ You should see a table of readings pop out
  * I didn't make any components but I probably should have done!
  * Initial login encodes the `<form>` element but future authentication requests use the `username` and `password` stored in the Vue model.
  * Every API request is authenticated
-
-## API
-
-<https://bioy.glitch.me/getReadings>
