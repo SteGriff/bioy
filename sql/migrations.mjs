@@ -10,7 +10,7 @@ console.log("Hello migrations @", __dirname);
 
 console.log("Connect DB");
 
-const db = new sqlite3.Database(".data/app.db");
+const db = new sqlite3.Database(".data/sqlite.db");
 
 const scriptRoot = "../sql/";
 const scripts = [
