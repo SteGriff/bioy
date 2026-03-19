@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt');
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.

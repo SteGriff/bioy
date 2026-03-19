@@ -23,10 +23,13 @@ var app = new Vue({
   mounted : function()
   {
     self = this;
-    $.get('/getReadings', function(data)
-    {
-      self.readings = JSON.parse(data);
-    });
+    fetch('/getReadings')
+      .then(response => response.json())
+      .then(data => {
+        self.readings = data;
+      })
+      .catch(err => console.error('Error fetching readings:', err));
+    
     if (self.username && self.password)
     {
       self.getNotes();
@@ -47,15 +50,31 @@ var app = new Vue({
     {
       self=this;
       self.message="Registering...";
-      var formData = getFormData($('.js-form'));
+      var formData = {
+        username: self.username,
+        password: self.password
+      };
       console.log(formData);
-      $.post('/createUser', formData, function(response){
+      fetch('/createUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.text().then(text => { throw new Error(text); });
+        }
+        return response.text();
+      })
+      .then(response => {
         console.log(response);
         self.message="";
         self.loggedIn = true;
       })
-      .fail(function(data){
-        self.showMessage(data.responseText);
+      .catch(err => {
+        self.showMessage(err.message);
         self.loggedIn = false;
       });
     },
@@ -65,20 +84,28 @@ var app = new Vue({
       self.message="Getting notes...";
       var formData = self.newRequest();
       console.log(formData);
-      $.get('/getNotes', formData, function(response){
-        self.notes = JSON.parse(response);
-        for(var nx in self.notes)
-        {
-          var note = self.notes[nx];
-          self.updateReading(note.Day, note.GeneralNote, note.Done);
-        }
-        self.message="Notes loaded";
-        self.loggedIn = true;
-      })
-      .fail(function(data){
-        self.showMessage(data.responseText);
-        self.loggedIn = false;
-      });
+      var params = new URLSearchParams(formData);
+      fetch('/getNotes?' + params)
+        .then(response => {
+          if (!response.ok) {
+            return response.text().then(text => { throw new Error(text); });
+          }
+          return response.json();
+        })
+        .then(data => {
+          self.notes = data;
+          for(var nx in self.notes)
+          {
+            var note = self.notes[nx];
+            self.updateReading(note.Day, note.GeneralNote, note.Done);
+          }
+          self.message="Notes loaded";
+          self.loggedIn = true;
+        })
+        .catch(err => {
+          self.showMessage(err.message);
+          self.loggedIn = false;
+        });
     },
     updateReading : function(day, note, done)
     {
@@ -96,14 +123,27 @@ var app = new Vue({
       formData['note'] = self.activeReading.GeneralNote;
       formData['done'] = self.activeReading.Done;
       console.log(formData);
-      $.post('/saveNote', formData, function(response){
+      fetch('/saveNote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.text().then(text => { throw new Error(text); });
+        }
+        return response.text();
+      })
+      .then(response => {
         console.log(response); 
         self.message="Saved!";
         self.updateReading(self.activeReading.Day, self.activeReading.GeneralNote, self.activeReading.Done);
         self.closeModal();
       })
-      .fail(function(data){
-        self.showMessage(data.responseText);
+      .catch(err => {
+        self.showMessage(err.message);
       });
     },
     logout : function()
@@ -147,12 +187,7 @@ var app = new Vue({
   }
 });
 
-function getFormData($form){
-    var formData = $form.serializeArray();
-    var data = {};
-    $.map(formData, n=>data[n['name']] = n['value']);
-    return data;
-}
+
 
 function getMostRecentSeptFirst(aDate)
 {
