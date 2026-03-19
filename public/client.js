@@ -1,18 +1,9 @@
-Vue.use(VueLocalStorage, {
-  bind: true
-});
-
 var app = new Vue({
   el: '#app',
-  localStorage : {
-    username : {
-      default: ''
-    },
-    password : {
-      default: ''
-    }
-  },
   data: {
+    keys: ['username', 'password'],
+    username: '',
+    password: '',
     message: '',
     loggedIn: false,
     modal: false,
@@ -23,6 +14,8 @@ var app = new Vue({
   mounted : function()
   {
     self = this;
+    self.load();
+    
     fetch('/getReadings')
       .then(response => response.json())
       .then(data => {
@@ -46,6 +39,16 @@ var app = new Vue({
     }
   },
   methods : {
+    save: function() {
+      this.keys.forEach(key => window.localStorage.setItem(key, this[key]));
+    },
+    load: function() {
+      this.keys.forEach(key => {
+        const saved = window.localStorage.getItem(key);
+        console.log(key, saved);
+        if (saved != null) this[key] = saved;
+      });
+    },
     createUser : function()
     {
       self=this;
@@ -72,6 +75,7 @@ var app = new Vue({
         console.log(response);
         self.message="";
         self.loggedIn = true;
+        self.save();
       })
       .catch(err => {
         self.showMessage(err.message);
@@ -101,6 +105,7 @@ var app = new Vue({
           }
           self.message="Notes loaded";
           self.loggedIn = true;
+          self.save();
         })
         .catch(err => {
           self.showMessage(err.message);
@@ -155,6 +160,7 @@ var app = new Vue({
       this.modal = false;
       this.notes = [];
       this.activeReading = null;
+      this.save();
     },
     newRequest: function()
     {
